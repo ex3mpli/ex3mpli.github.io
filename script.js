@@ -73,42 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Setup
-function setupChannelList() {
-    const list = document.getElementById("channelList");
-    const searchValue = document.getElementById("searchInput").value.toLowerCase();
-    const selectedCategory = document.getElementById("categoryFilter").value;
+  setupChannelList();
+  searchInput.addEventListener('input', setupChannelList);
+  categoryFilter.addEventListener('change', setupChannelList);
 
-    const filteredChannels = channels.filter(channel => {
-        const matchesCategory = selectedCategory === "all" || channel.category === selectedCategory;
-        const matchesSearch = channel.name.toLowerCase().includes(searchValue);
-        return matchesCategory && matchesSearch;
-    });
-
-    list.innerHTML = "";
-
-    filteredChannels.forEach((channel, index) => {
-        const li = document.createElement("li");
-        li.textContent = channel.name;
-        li.onclick = () => playChannel(channel);
-        list.appendChild(li);
-    });
-
-    document.getElementById("channelCount").textContent = `${filteredChannels.length} channel(s)`;
-}
-
-function playChannel(channel) {
-    jwplayer("player").setup({
-        file: channel.file,
-        width: "100%",
-        aspectratio: "16:9",
-        autostart: true
-    });
-    document.getElementById("fallbackMessage").style.display = "none";
-}
-
-// Initial setup
-document.addEventListener("DOMContentLoaded", setupChannelList);
-  
   // Clock
   function updateClock() {
     const now = new Date();
