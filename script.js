@@ -12,12 +12,6 @@ const channels = [
     drm: 'clearkey', 
   },
   {
-    name: 'TV5',
-    src: 'https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/tv5_hd.mpd',
-    key: '2615129ef2c846a9bbd43a641c7303ef:07c7f996b1734ea288641a68e1cfdc4d',
-    drm: 'clearkey',
-  },
-  {
     name: 'ONE SPORTS',
     src: 'https://qp-pldt-live-grp-07-prod.akamaized.net/out/u/cg_onesports_hd.mpd',
     key: '53c3bf2eba574f639aa21f2d4409ff11:3de28411cf08a64ea935b9578f6d0edd',
