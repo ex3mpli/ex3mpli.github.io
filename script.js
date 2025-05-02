@@ -1053,66 +1053,137 @@ const channels = [
   },
 ];
 
-document.addEventListener('DOMContentLoaded', () => {
-  const playerElement = document.getElementById('player');
-  const fallbackMessage = document.getElementById('fallbackMessage');
-  const channelList = document.getElementById('channelList');
-  const searchInput = document.getElementById('searchInput');
-  const categoryFilter = document.getElementById('categoryFilter');
-  const channelCount = document.getElementById('channelCount');
+function updateClock() {
+  const now = new Date();
+  const timeString = now.toLocaleTimeString();
+  document.getElementById('clock').textContent = timeString;
+}
 
-  function playChannel(channel) {
-    fallbackMessage.style.display = 'none';
-    jwplayer('player').setup({
-      file: channel.src,
-      type: channel.src.endsWith('.mpd') ? 'dash' : 'hls',
-      drm: channel.drm === 'clearkey' ? {
-        clearkey: {
-          keyId: channel.key?.split(':')[0],
-          key: channel.key?.split(':')[1],
-        }
-      } : undefined,
-      width: '100%',
-      aspectratio: '16:9',
-      autostart: true,
-    });
-  }
+function populateCategoryDropdown() {
+  const dropdown = document.getElementById('categoryFilter');
+  const uniqueCategories = Array.from(
+    new Set(channels.map(channel => channel.category))
+  ).sort();
 
-  function setupChannelList() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const selectedCategory = categoryFilter.value;
-    channelList.innerHTML = '';
-    const filtered = channels.filter(channel => {
-      const matchSearch = channel.name.toLowerCase().includes(searchTerm);
-      const matchCategory = selectedCategory === 'all' || !selectedCategory;
-      return matchSearch && matchCategory;
-    });
-    filtered.forEach(channel => {
-      const li = document.createElement('li');
-      li.textContent = channel.name;
-      li.onclick = () => {
-        document.querySelectorAll('.channel-list li').forEach(el => el.classList.remove('active'));
-        li.classList.add('active');
-        playChannel(channel);
-      };
-      channelList.appendChild(li);
-    });
-    channelCount.textContent = `📺 All Channels: ${filtered.length}`;
-  }
+  uniqueCategories.forEach(category => {
+    const option = document.createElement('option');
+    option.value = category;
+    option.textContent = category;
+    dropdown.appendChild(option);
+  });
+}
 
+function setupChannelList() {
+  const list = document.getElementById('channelList');
+  const countDisplay = document.getElementById('channelCount');
+  const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+  const selectedCategory = document.getElementById('categoryFilter').value;
+
+  list.innerHTML = '';
+  let visibleCount = 0;
+
+  channels.forEach((channel, index) => {
+    const matchesCategory = selectedCategory === 'all' || channel.category === selectedCategory;
+    const matchesSearch = channel.name.toLowerCase().includes(searchQuery);
+
+    if (matchesCategory && matchesSearch) {
+      visibleCount++;
+      const listItem = document.createElement('li');
+      listItem.textContent = channel.name;
+      listItem.tabIndex = 0;
+      listItem.onclick = () => loadChannel(index);
+
+      if (index === activeIndex) {
+        listItem.classList.add('active');
+      }
+
+      list.appendChild(listItem);
+    }
+  });
+
+  countDisplay.textContent = `Total Channel${visibleCount !== 1 ? 's' : ''}: ${visibleCount}`;
+}
+
+function initPlayer() {
+  jwPlayerInstance = jwplayer('player').setup({
+    width: '100%',
+    height: '100%',
+    autostart: false,
+    stretching: 'exactfit',
+    aspectratio: '16:9',
+    primary: 'html5',
+    hlshtml: true,
+    displaytitle: false,
+    logo: { hide: true },
+  });
+
+  jwPlayerInstance.on('error', error => {
+    console.error('JWPlayer error:', error);
+    showFallbackMessage();
+  });
+
+  jwPlayerInstance.on('play', () => {
+    hideFallbackMessage();
+  });
+}
+
+function loadChannel(index) {
+  if (activeIndex === index) return;
+
+  activeIndex = index;
   setupChannelList();
-  searchInput.addEventListener('input', setupChannelList);
-  categoryFilter.addEventListener('change', setupChannelList);
 
-  function updateClock() {
-    const now = new Date();
-    const h = now.getHours();
-    const m = String(now.getMinutes()).padStart(2, '0');
-    const s = String(now.getSeconds()).padStart(2, '0');
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    const displayHour = h % 12 || 12;
-    document.getElementById('clock').textContent = `${displayHour}:${m}:${s} ${ampm}`;
+  const channel = channels[index];
+  const config = {
+    file: channel.url,
+    title: channel.name,
+    autostart: true,
+  };
+
+  if (channel.type === 'mpd' && channel.drm) {
+    config.drm = channel.drm;
   }
-  setInterval(updateClock, 1000);
+
+  hideFallbackMessage();
+  jwPlayerInstance.setup(config);
+}
+
+function showFallbackMessage() {
+  document.getElementById('fallbackMessage').style.display = 'block';
+}
+
+function hideFallbackMessage() {
+  document.getElementById('fallbackMessage').style.display = 'none';
+}
+
+window.addEventListener('load', () => {
+  initPlayer();
+  populateCategoryDropdown();
+  setupChannelList();
+  showFallbackMessage();
   updateClock();
+  setInterval(updateClock, 1000);
 });
+
+window.addEventListener('beforeunload', () => {
+  if (jwPlayerInstance) jwPlayerInstance.remove();
+});
+
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+function ctrlShiftKey(event, key) {
+  return event.ctrlKey && event.shiftKey && event.keyCode === key.charCodeAt(0);
+}
+
+document.onkeydown = event => {
+  const isBlockedKey =
+    event.keyCode === 123 || // F12
+    ctrlShiftKey(event, 'I') ||
+    ctrlShiftKey(event, 'J') ||
+    ctrlShiftKey(event, 'C') ||
+    (event.ctrlKey && event.keyCode === 'U'.charCodeAt(0));
+
+  if (isBlockedKey) {
+    return false;
+  }
+};
