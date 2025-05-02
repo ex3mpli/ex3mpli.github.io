@@ -4,23 +4,24 @@ const channels = [
     src: 'https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/tv5_hd.mpd',
     key: '2615129ef2c846a9bbd43a641c7303ef:07c7f996b1734ea288641a68e1cfdc4d',
     drm: 'clearkey',
-    category: "News",
+    category: "News"
   },
   {
     name: 'ONE SPORTS',
     src: 'https://qp-pldt-live-grp-07-prod.akamaized.net/out/u/cg_onesports_hd.mpd',
     key: '53c3bf2eba574f639aa21f2d4409ff11:3de28411cf08a64ea935b9578f6d0edd',
     drm: 'clearkey',
-    category: "Sports",
+    category: "Sports"
   },
   {
     name: 'GMA',
     src: 'https://cdn.ganbaruby23.xyz/stream/restream/gma/stream.m3u8?uid=1485345779&u=FiliTV&p=ea3e07a61f5af654b1bc96090db16bf246337738d5fceae3401a1205f2f8a60f',
-    category: "Movies",
+    category: "Movies"
   },
   {
     name: 'GTV',
     src: 'https://cdn.ganbaruby23.xyz/stream/restream/gtv/stream.m3u8?uid=1485345779&u=FiliTV&p=ea3e07a61f5af654b1bc96090db16bf246337738d5fceae3401a1205f2f8a60f',
+    category: "Movies"
   },
 ];
 // ===== DOM Elements =====
@@ -31,10 +32,35 @@ const channelCount = document.getElementById("channelCount");
 const playerContainer = document.getElementById("player");
 const fallbackMessage = document.getElementById("fallbackMessage");
 
+let channels = [];
+
+// ===== Load Channels from JSON =====
+async function loadChannels() {
+  try {
+    const res = await fetch("channels.json");
+    channels = await res.json();
+    populateCategoryFilter();
+    setupChannelList();
+  } catch (error) {
+    console.error("Failed to load channels:", error);
+  }
+}
+
+// ===== Populate Category Filter =====
+function populateCategoryFilter() {
+  const categories = ["all", ...new Set(channels.map(c => c.category))];
+  categoryFilter.innerHTML = categories.map(cat => 
+    `<option value="${cat}">${cat}</option>`
+  ).join('');
+}
+
 // ===== Setup Channel List =====
 function setupChannelList() {
   const search = searchInput.value.toLowerCase();
-  const filtered = channels.filter((channel) =>
+  const selectedCategory = categoryFilter.value;
+
+  const filtered = channels.filter(channel =>
+    (selectedCategory === "all" || channel.category === selectedCategory) &&
     channel.name.toLowerCase().includes(search)
   );
 
@@ -64,7 +90,9 @@ function playChannel(channel, index) {
   document.querySelectorAll("#channelList li").forEach(li => li.classList.remove("active"));
 
   // Highlight current
-  channelList.children[index].classList.add("active");
+  if (channelList.children[index]) {
+    channelList.children[index].classList.add("active");
+  }
 
   fallbackMessage.style.display = "none";
 }
@@ -81,6 +109,9 @@ function startClock() {
 
 // ===== Initialize on DOM Ready =====
 document.addEventListener("DOMContentLoaded", () => {
-  setupChannelList();
+  loadChannels();
   startClock();
+  searchInput.addEventListener("input", setupChannelList);
+  categoryFilter.addEventListener("change", setupChannelList);
 });
+
