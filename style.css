@@ -56,25 +56,6 @@ a:hover {
     left: 0;
 }
 
-#fallbackMessage {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: black;
-    background-color: #ffb52b;
-    padding: 2rem 4rem;
-    border-radius: 0.75rem;
-    font-size: 32px;
-    text-align: center;
-    z-index: 999;
-    display: block;
-    font-family: 'Bebas Neue', sans-serif;
-    border: 2px solid #ffffff; /* Light border */
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
 #clock {
     position: absolute;
     top: 10px;
