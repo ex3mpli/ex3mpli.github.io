@@ -1397,41 +1397,61 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  document.addEventListener('DOMContentLoaded', () => {
+  const playerElement = document.getElementById('player');
+  const fallbackMessage = document.getElementById('fallbackMessage');
+  const channelList = document.getElementById('channelList');
+  const searchInput = document.getElementById('searchInput');
+  const categoryFilter = document.getElementById('categoryFilter');
+  const channelCount = document.getElementById('channelCount');
+
+  function playChannel(channel) {
+    fallbackMessage.style.display = 'none';
+
+    jwplayer('player').setup({
+      file: channel.src,
+      type: channel.src.endsWith('.mpd') ? 'dash' : 'hls',
+      drm: channel.drm === 'clearkey' ? {
+        clearkey: {
+          keyId: channel.key?.split(':')[0],
+          key: channel.key?.split(':')[1],
+        }
+      } : undefined,
+      width: '100%',
+      aspectratio: '16:9',
+      autostart: true,
+    });
+  }
+
   function setupChannelList() {
-    const list = document.getElementById("channelList");
-    const searchValue = document.getElementById("searchInput").value.toLowerCase();
-    const selectedCategory = document.getElementById("categoryFilter").value;
+    const searchTerm = searchInput.value.toLowerCase();
+    const selectedCategory = categoryFilter.value;
+    channelList.innerHTML = '';
 
-    const filteredChannels = channels.filter(channel => {
-        const matchesCategory = selectedCategory === "all" || channel.category === selectedCategory;
-        const matchesSearch = channel.name.toLowerCase().includes(searchValue);
-        return matchesCategory && matchesSearch;
+    const filtered = channels.filter(channel => {
+      const matchSearch = channel.name.toLowerCase().includes(searchTerm);
+      const matchCategory = selectedCategory === 'all' || !selectedCategory;
+      return matchSearch && matchCategory;
     });
 
-    list.innerHTML = "";
-
-    filteredChannels.forEach((channel, index) => {
-        const li = document.createElement("li");
-        li.textContent = channel.name;
-        li.onclick = () => playChannel(channel);
-        list.appendChild(li);
+    filtered.forEach(channel => {
+      const li = document.createElement('li');
+      li.textContent = channel.name;
+      li.onclick = () => {
+        document.querySelectorAll('.channel-list li').forEach(el => el.classList.remove('active'));
+        li.classList.add('active');
+        playChannel(channel);
+      };
+      channelList.appendChild(li);
     });
 
-    document.getElementById("channelCount").textContent = `${filteredChannels.length} channel(s)`;
-}
+    channelCount.textContent = `📺 All Channels: ${filtered.length}`;
+  }
 
-function playChannel(channel) {
-    jwplayer("player").setup({
-        file: channel.file,
-        width: "100%",
-        aspectratio: "16:9",
-        autostart: true
-    });
-    document.getElementById("fallbackMessage").style.display = "none";
-}
-
-// Initial setup
-document.addEventListener("DOMContentLoaded", setupChannelList);
+  // Setup
+  setupChannelList();
+  searchInput.addEventListener('input', setupChannelList);
+  categoryFilter.addEventListener('change', setupChannelList);
 
   // Clock
   function updateClock() {
