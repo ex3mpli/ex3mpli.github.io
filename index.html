@@ -1,30 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BisdakTV</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jwplayer.com/libraries/IDzF9Zmk.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BisdakTV</title>
+<link rel="icon" type="image/png" href="http://bisdaktv.store/favicon.png">
+<script src="https://fle-rvd0i9o8-moo.com/player/jw8_26/jwplayer.js"></script>
+<script>jwplayer.key = "eNFaXCjyURVoCCGiHp7HTQ3hDhE/AfL0g8VE1fRbL84=";</script>
+<script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="container">
+<div class="container">
     <div class="video-container">
-      <div id="clock"></div>
-      <div id="player"></div>
-      <div id="fallbackMessage">Please select a channel</div>
+        <div id="clock"></div>
+        <div id="player"></div>
+        <div id="fallbackMessage">Please select a channel</div>
     </div>
+
     <aside class="sidebar">
-      <div class="controls">
-        <input type="text" id="searchInput" placeholder="Search channels..." />
-        <select id="categoryFilter">
-          <option value="all">All</option>
-        </select>
-        <span id="channelCount"></span>
-      </div>
-      <ul id="channelList" class="channel-list"></ul>
+        <div class="top-controls">
+            <div class="channel-text">BisdakTV</div>
+            <div class="credits">Owned and made by <a href="https://phcorner.org/members/ex3mpli.1818995/" target="_blank">ex3mpli</a> on PHcorner. Enjoy!</div>
+            <div id="channelCount"></div>
+            <select id="categoryFilter" onchange="setupChannelList()">
+                <option value="all">All Channels</option>
+            </select>
+            <input class="search-input" type="search" placeholder="Search..." oninput="setupChannelList()" id="searchInput" />
+        </div>
+
+        <div class="list-container">
+            <ul class="channel-list" id="channelList"></ul>
+        </div>
     </aside>
-  </div>
-  <script src="script.js"></script>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
