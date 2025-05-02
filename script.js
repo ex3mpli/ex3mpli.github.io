@@ -1366,7 +1366,7 @@ const channels = [
     {
       name: 'BOXING TV',
       src: 'https://1180885077.rsc.cdn77.org/HLS/BOXINGTV.m3u8',
-    },
+    }
   ],
   correctPassword = 'reduxneue!'
 function togglePassword() {
