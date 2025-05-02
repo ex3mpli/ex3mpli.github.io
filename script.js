@@ -4,12 +4,14 @@ const channels = [
       src: 'https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/tv5_hd.mpd',
       key: '2615129ef2c846a9bbd43a641c7303ef:07c7f996b1734ea288641a68e1cfdc4d',
       drm: 'clearkey',
+      category: 'Cignal',
     },
     {
       name: 'ONE SPORTS',
       src: 'https://qp-pldt-live-grp-07-prod.akamaized.net/out/u/cg_onesports_hd.mpd',
       key: '53c3bf2eba574f639aa21f2d4409ff11:3de28411cf08a64ea935b9578f6d0edd',
       drm: 'clearkey',
+      category: 'Cignal',
     },
     {
       name: 'GMA',
@@ -28,6 +30,7 @@ const channels = [
       src: 'https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/cg_a2z.mpd',
       key: 'f703e4c8ec9041eeb5028ab4248fa094:c22f2162e176eee6273a5d0b68d19530',
       drm: 'clearkey',
+      category: 'Cignal',
     },
     {
       name: 'ALL TV',
@@ -38,12 +41,14 @@ const channels = [
       src: 'https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/cg_ptv4_sd.mpd',
       key: '71a130a851b9484bb47141c8966fb4a3:ad1f003b4f0b31b75ea4593844435600',
       drm: 'clearkey',
+      category: 'Cignal',
     },
     {
       name: 'IBC 13',
       src: 'https://qp-pldt-live-grp-07-prod.akamaized.net/out/u/ibc13_sd_new.mpd',
       key: '16ecd238c0394592b8d3559c06b1faf5:05b47ae3be1368912ebe28f87480fc84',
       drm: 'clearkey',
+      category: 'Cignal',
     },
     {
       name: 'NET25',
@@ -58,6 +63,7 @@ const channels = [
       src: 'https://qp-pldt-live-grp-03-prod.akamaized.net/out/u/cnn_rptv_prod_hd.mpd',
       key: '1917f4caf2364e6d9b1507326a85ead6:a1340a251a5aa63a9b0ea5d9d7f67595',
       drm: 'clearkey',
+      category: 'Cignal',
     },
     {
       name: 'ANC',
