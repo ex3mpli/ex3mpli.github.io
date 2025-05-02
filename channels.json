@@ -1,0 +1,17 @@
+[
+  {
+    "name": "News Channel",
+    "url": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+    "category": "News"
+  },
+  {
+    "name": "Sports Live",
+    "url": "https://test-streams.mux.dev/test_001/stream.m3u8",
+    "category": "Sports"
+  },
+  {
+    "name": "Movie Night",
+    "url": "https://test-streams.mux.dev/test_002/stream.m3u8",
+    "category": "Movies"
+  }
+]
