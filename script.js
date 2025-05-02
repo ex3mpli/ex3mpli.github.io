@@ -1398,32 +1398,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function setupChannelList() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const selectedCategory = categoryFilter.value;
-    channelList.innerHTML = '';
-
-    const filtered = channels.filter(channel => {
-      const matchSearch = channel.name.toLowerCase().includes(searchTerm);
-      const matchCategory = selectedCategory === 'all' || !selectedCategory;
-      return matchSearch && matchCategory;
-    });
-
-    filtered.forEach(channel => {
-      const li = document.createElement('li');
-      li.textContent = channel.name;
-      li.onclick = () => {
-        document.querySelectorAll('.channel-list li').forEach(el => el.classList.remove('active'));
-        li.classList.add('active');
-        playChannel(channel);
-      };
-      channelList.appendChild(li);
-    });
-
-    channelCount.textContent = `📺 All Channels: ${filtered.length}`;
-  }
-
-  // Setup
-  function setupChannelList() {
     const list = document.getElementById("channelList");
     const searchValue = document.getElementById("searchInput").value.toLowerCase();
     const selectedCategory = document.getElementById("categoryFilter").value;
