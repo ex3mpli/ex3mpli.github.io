@@ -1421,9 +1421,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Setup
-  setupChannelList();
-  searchInput.addEventListener('input', setupChannelList);
-  categoryFilter.addEventListener('change', setupChannelList);
+  function setupChannelList() {
+    const list = document.getElementById("channelList");
+    const searchValue = document.getElementById("searchInput").value.toLowerCase();
+    const selectedCategory = document.getElementById("categoryFilter").value;
+    const filtered = channels.filter(channel =>
+        (selectedCategory === "all" || channel.category === selectedCategory) &&
+        channel.name.toLowerCase().includes(searchValue)
+    );
+
+    list.innerHTML = "";
+    filtered.forEach((channel, index) => {
+        const li = document.createElement("li");
+        li.textContent = channel.name;
+        li.addEventListener("click", () => playChannel(index));
+        list.appendChild(li);
+    });
+
+    document.getElementById("channelCount").textContent = `${filtered.length} channels`;
+}
 
   // Clock
   function updateClock() {
