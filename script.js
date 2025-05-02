@@ -18,7 +18,7 @@ const channels = [
   {
     name: 'GTV',
     src: 'https://cdn.ganbaruby23.xyz/stream/restream/gtv/stream.m3u8?uid=1485345779&u=FiliTV&p=ea3e07a61f5af654b1bc96090db16bf246337738d5fceae3401a1205f2f8a60f',
-  }
+  },
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
