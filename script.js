@@ -1446,7 +1446,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       _0x4b7da4.play()
     }
   }
-  function _0x512efe() {
+  function setupChannelList() {
     channels.forEach((_0x5d3d8f) => {
       const _0x180db9 = document.createElement('li')
       _0x180db9.textContent = _0x5d3d8f.name
@@ -1464,7 +1464,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('channelCount').textContent =
       '\uD83D\uDCFA All Channels: ' + channels.length
   }
-  _0x512efe()
+  setupChannelList()
   window.searchChannels = function () {
     const _0x57c535 = document.getElementById('searchInput').value.toLowerCase()
     document.querySelectorAll('.sidebar li').forEach((_0x31643e) => {
