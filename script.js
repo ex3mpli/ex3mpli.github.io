@@ -4,16 +4,19 @@ const channels = [
     src: 'https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/tv5_hd.mpd',
     key: '2615129ef2c846a9bbd43a641c7303ef:07c7f996b1734ea288641a68e1cfdc4d',
     drm: 'clearkey',
+    category: "News",
   },
   {
     name: 'ONE SPORTS',
     src: 'https://qp-pldt-live-grp-07-prod.akamaized.net/out/u/cg_onesports_hd.mpd',
     key: '53c3bf2eba574f639aa21f2d4409ff11:3de28411cf08a64ea935b9578f6d0edd',
     drm: 'clearkey',
+    category: "Sports",
   },
   {
     name: 'GMA',
     src: 'https://cdn.ganbaruby23.xyz/stream/restream/gma/stream.m3u8?uid=1485345779&u=FiliTV&p=ea3e07a61f5af654b1bc96090db16bf246337738d5fceae3401a1205f2f8a60f',
+    category: "Movies",
   },
   {
     name: 'GTV',
