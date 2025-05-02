@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BisdakTV</title>
+<link rel="icon" type="image/png" href="https://i.imgur.com/MObShCO.png">
+<script src="https://fle-rvd0i9o8-moo.com/player/jw8_26/jwplayer.js"></script>
+<script>jwplayer.key = "eNFaXCjyURVoCCGiHp7HTQ3hDhE/AfL0g8VE1fRbL84=";</script>
+<script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="video-container">
+        <div id="clock"></div>
+        <div id="player"></div>
+        <div id="fallbackMessage">Choose a channel</div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="top-controls">
+            <div class="channel-text">BisdakTV</div>
+            <div class="credits">Owned by <a href="https://phcorner.org/members/ex3mpli.1818995/" target="_blank">BisdakTV</a> on PHcorner</div>
+            <div id="channelCount"></div>
+            <select id="categoryFilter" onchange="setupChannelList()">
+                <option value="all">All Categories</option>
+            </select>
+            <input class="search-input" type="search" placeholder="Search..." oninput="setupChannelList()" id="searchInput" />
+        </div>
+
+        <div class="list-container">
+            <ul class="channel-list" id="channelList"></ul>
+        </div>
+    </aside>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
