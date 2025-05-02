@@ -4,12 +4,14 @@ const channels = [
       src: 'https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/tv5_hd.mpd',
       key: '2615129ef2c846a9bbd43a641c7303ef:07c7f996b1734ea288641a68e1cfdc4d',
       drm: 'clearkey',
+      category: 'Cignal',
     },
     {
       name: 'ONE SPORTS',
       src: 'https://qp-pldt-live-grp-07-prod.akamaized.net/out/u/cg_onesports_hd.mpd',
       key: '53c3bf2eba574f639aa21f2d4409ff11:3de28411cf08a64ea935b9578f6d0edd',
       drm: 'clearkey',
+      category: 'Cignal',
     },
     {
       name: 'GMA',
@@ -1421,9 +1423,41 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Setup
-  setupChannelList();
-  searchInput.addEventListener('input', setupChannelList);
-  categoryFilter.addEventListener('change', setupChannelList);
+  function setupChannelList() {
+    const list = document.getElementById("channelList");
+    const searchValue = document.getElementById("searchInput").value.toLowerCase();
+    const selectedCategory = document.getElementById("categoryFilter").value;
+
+    const filteredChannels = channels.filter(channel => {
+        const matchesCategory = selectedCategory === "all" || channel.category === selectedCategory;
+        const matchesSearch = channel.name.toLowerCase().includes(searchValue);
+        return matchesCategory && matchesSearch;
+    });
+
+    list.innerHTML = "";
+
+    filteredChannels.forEach((channel, index) => {
+        const li = document.createElement("li");
+        li.textContent = channel.name;
+        li.onclick = () => playChannel(channel);
+        list.appendChild(li);
+    });
+
+    document.getElementById("channelCount").textContent = `${filteredChannels.length} channel(s)`;
+}
+
+function playChannel(channel) {
+    jwplayer("player").setup({
+        file: channel.file,
+        width: "100%",
+        aspectratio: "16:9",
+        autostart: true
+    });
+    document.getElementById("fallbackMessage").style.display = "none";
+}
+
+// Initial setup
+document.addEventListener("DOMContentLoaded", setupChannelList);
 
   // Clock
   function updateClock() {
