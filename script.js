@@ -1,4 +1,3 @@
-// ===== Channel Data =====
 const channels = [
   {
       name: 'TV5',
@@ -1370,64 +1369,73 @@ const channels = [
     }
 ];
 
-// ===== DOM Elements =====
-const channelList = document.getElementById("channelList");
-const searchInput = document.getElementById("searchInput");
-const categoryFilter = document.getElementById("categoryFilter");
-const channelCount = document.getElementById("channelCount");
-const playerContainer = document.getElementById("player");
-const fallbackMessage = document.getElementById("fallbackMessage");
+document.addEventListener('DOMContentLoaded', () => {
+  const playerElement = document.getElementById('player');
+  const fallbackMessage = document.getElementById('fallbackMessage');
+  const channelList = document.getElementById('channelList');
+  const searchInput = document.getElementById('searchInput');
+  const categoryFilter = document.getElementById('categoryFilter');
+  const channelCount = document.getElementById('channelCount');
 
-// ===== Setup Channel List =====
-function setupChannelList() {
-  const search = searchInput.value.toLowerCase();
-  const filtered = channels.filter((channel) =>
-    channel.name.toLowerCase().includes(search)
-  );
+  function playChannel(channel) {
+    fallbackMessage.style.display = 'none';
 
-  // Clear and populate list
-  channelList.innerHTML = "";
+    jwplayer('player').setup({
+      file: channel.src,
+      type: channel.src.endsWith('.mpd') ? 'dash' : 'hls',
+      drm: channel.drm === 'clearkey' ? {
+        clearkey: {
+          keyId: channel.key?.split(':')[0],
+          key: channel.key?.split(':')[1],
+        }
+      } : undefined,
+      width: '100%',
+      aspectratio: '16:9',
+      autostart: true,
+    });
+  }
 
-  filtered.forEach((channel, index) => {
-    const li = document.createElement("li");
-    li.textContent = channel.name;
-    li.addEventListener("click", () => playChannel(channel, index));
-    channelList.appendChild(li);
-  });
+  function setupChannelList() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const selectedCategory = categoryFilter.value;
+    channelList.innerHTML = '';
 
-  channelCount.textContent = `${filtered.length} channel${filtered.length !== 1 ? "s" : ""}`;
-}
+    const filtered = channels.filter(channel => {
+      const matchSearch = channel.name.toLowerCase().includes(searchTerm);
+      const matchCategory = selectedCategory === 'all' || !selectedCategory;
+      return matchSearch && matchCategory;
+    });
 
-// ===== Play Channel =====
-function playChannel(channel, index) {
-  jwplayer("player").setup({
-    file: channel.url,
-    width: "100%",
-    height: "100%",
-    autostart: true
-  });
+    filtered.forEach(channel => {
+      const li = document.createElement('li');
+      li.textContent = channel.name;
+      li.onclick = () => {
+        document.querySelectorAll('.channel-list li').forEach(el => el.classList.remove('active'));
+        li.classList.add('active');
+        playChannel(channel);
+      };
+      channelList.appendChild(li);
+    });
 
-  // Remove active class from all items
-  document.querySelectorAll("#channelList li").forEach(li => li.classList.remove("active"));
+    channelCount.textContent = `📺 All Channels: ${filtered.length}`;
+  }
 
-  // Highlight current
-  channelList.children[index].classList.add("active");
-
-  fallbackMessage.style.display = "none";
-}
-
-// ===== Clock Display =====
-function startClock() {
-  const clock = document.getElementById("clock");
-  setInterval(() => {
-    const now = new Date();
-    const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    clock.textContent = time;
-  }, 1000);
-}
-
-// ===== Initialize on DOM Ready =====
-document.addEventListener("DOMContentLoaded", () => {
+  // Setup
   setupChannelList();
-  startClock();
+  searchInput.addEventListener('input', setupChannelList);
+  categoryFilter.addEventListener('change', setupChannelList);
+
+  // Clock
+  function updateClock() {
+    const now = new Date();
+    const h = now.getHours();
+    const m = String(now.getMinutes()).padStart(2, '0');
+    const s = String(now.getSeconds()).padStart(2, '0');
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const displayHour = h % 12 || 12;
+    document.getElementById('clock').textContent = `${displayHour}:${m}:${s} ${ampm}`;
+  }
+
+  setInterval(updateClock, 1000);
+  updateClock();
 });
