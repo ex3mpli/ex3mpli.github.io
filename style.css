@@ -1,25 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Century+Gothic:wght@400;700&display=swap');
+/* Import fallback font (Dubai is not on Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+
 * {
-    font-family: 'Tiny5'; font-size: 15px;
+    font-family: 'Dubai Light', 'Open Sans', sans-serif;
+    font-size: 15px;
 }
+
 html, body {
     margin: 0;
     padding: 0;
-    background-color: #121212;
-    font-family: 'Century Gothic', sans-serif;
-    color: white;
+    background-color: #e6f2ff; /* light blue background */
+    color: #003366; /* deep navy text */
     height: 100vh;
     width: 100vw;
     overflow: hidden;
 }
 
 a {
-    color: #888;
+    color: #007acc;
     font-size: 12px;
+    text-decoration: none;
 }
 
 a:hover {
-    color: grey;
+    color: #005f99;
 }
 
 .container {
@@ -34,7 +38,7 @@ a:hover {
 .video-container {
     position: relative;
     flex: 1;
-    background-color: black;
+    background-color: #000;
     border-radius: 0.75rem;
     overflow: hidden;
     display: flex;
@@ -57,8 +61,8 @@ a:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: black;
-    background-color: #ffb52b;
+    background-color: #b3e0ff;
+    color: #003366;
     padding: 2rem 4rem;
     border-radius: 0.75rem;
     font-size: 24px;
@@ -72,18 +76,17 @@ a:hover {
     top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #ffb52b;
-    color: black;
+    background-color: #b3e0ff;
+    color: #003366;
     padding: 5px 15px;
     border-radius: 20px;
     font-size: 15px;
     z-index: 100;
-    font-family: Helvetica;
 }
 
 .sidebar {
     width: 320px;
-    background-color: #222;
+    background-color: #f0f8ff;
     border-radius: 0.75rem;
     display: flex;
     flex-direction: column;
@@ -100,8 +103,8 @@ a:hover {
 }
 
 select, input {
-    background-color: #2a2a2a;
-    color: white;
+    background-color: #d9f0ff;
+    color: #003366;
     border: none;
     border-radius: 0.375rem;
     padding: 0.5rem;
@@ -117,12 +120,13 @@ input.search-input {
     font-size: 25px;
     margin-bottom: 2px;
     width: 100%;
+    color: #005f99;
 }
 
 .credits {
     text-align: center;
     font-size: 12px;
-    color: #888;
+    color: #007acc;
     width: 100%;
 }
 
@@ -130,7 +134,7 @@ input.search-input {
     text-align: center;
     font-size: 14px;
     margin-bottom: 5px;
-    color: #ffb52b;
+    color: #007acc;
 }
 
 .list-container {
@@ -148,14 +152,15 @@ ul.channel-list li {
     padding: 0.5rem;
     cursor: pointer;
     border-radius: 0.375rem;
+    color: #003366;
 }
 
 ul.channel-list li.active {
-    background-color: #ffb52b;
+    background-color: #99d6ff;
 }
 
 ul.channel-list li:hover:not(.active) {
-    background-color: #333;
+    background-color: #cceeff;
 }
 
 .list-container::-webkit-scrollbar {
@@ -163,18 +168,18 @@ ul.channel-list li:hover:not(.active) {
 }
 
 .list-container::-webkit-scrollbar-track {
-    background: #1c1c1c;
+    background: #cceeff;
     border-radius: 4px;
 }
 
 .list-container::-webkit-scrollbar-thumb {
-    background-color: #444;
+    background-color: #66b3ff;
     border-radius: 4px;
-    border: 2px solid #1c1c1c;
+    border: 2px solid #cceeff;
 }
 
 .list-container::-webkit-scrollbar-thumb:hover {
-    background-color: #ffb52b;
+    background-color: #3399ff;
 }
 
 @media (orientation: portrait) {
