@@ -1,16 +1,15 @@
-/* Import fallback font (Dubai is not on Google Fonts) */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
 
 * {
     font-family: 'Dubai Light', 'Open Sans', sans-serif;
-    font-size: 15px;
+    font-size: clamp(14px, 1.2vw, 18px); /* Responsive base font size */
 }
 
 html, body {
     margin: 0;
     padding: 0;
-    background-color: #e6f2ff; /* light blue background */
-    color: #003366; /* deep navy text */
+    background-color: #e6f2ff;
+    color: #003366;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
@@ -18,7 +17,7 @@ html, body {
 
 a {
     color: #007acc;
-    font-size: 12px;
+    font-size: clamp(11px, 1vw, 14px);
     text-decoration: none;
 }
 
@@ -33,6 +32,7 @@ a:hover {
     gap: 1rem;
     padding: 1rem;
     box-sizing: border-box;
+    flex-direction: row;
 }
 
 .video-container {
@@ -65,7 +65,7 @@ a:hover {
     background-color: #b3e0ff;
     padding: 2rem 4rem;
     border-radius: 0.75rem;
-    font-size: 2.5vw; /* Scales on desktop and TV */
+    font-size: clamp(18px, 2.5vw, 32px);
     text-align: center;
     z-index: 999;
     display: block;
@@ -77,22 +77,6 @@ a:hover {
     word-wrap: break-word;
 }
 
-/* Mobile screens (small devices) */
-@media (max-width: 480px) {
-    #fallbackMessage {
-        padding: 1rem 1.5rem;
-        font-size: 5vw;
-    }
-}
-
-/* TV screens (very large screens) */
-@media (min-width: 1920px) {
-    #fallbackMessage {
-        font-size: 2vw;
-        padding: 3rem 5rem;
-    }
-}
-
 #clock {
     position: absolute;
     top: 10px;
@@ -102,7 +86,7 @@ a:hover {
     color: #003366;
     padding: 5px 15px;
     border-radius: 20px;
-    font-size: 15px;
+    font-size: clamp(13px, 1.2vw, 18px);
     z-index: 100;
 }
 
@@ -129,8 +113,9 @@ select, input {
     color: #003366;
     border: none;
     border-radius: 0.375rem;
-    padding: 0.5rem;
-    font-size: 0.875rem;
+    padding: 0.75rem;
+    font-size: clamp(13px, 1vw, 16px);
+    min-height: 44px; /* mobile tap target size */
 }
 
 input.search-input {
@@ -139,7 +124,7 @@ input.search-input {
 
 .channel-text {
     text-align: center;
-    font-size: 25px;
+    font-size: clamp(20px, 2vw, 28px);
     margin-bottom: 2px;
     width: 100%;
     color: #005f99;
@@ -147,14 +132,14 @@ input.search-input {
 
 .credits {
     text-align: center;
-    font-size: 12px;
+    font-size: clamp(11px, 1vw, 14px);
     color: #007acc;
     width: 100%;
 }
 
 #channelCount {
     text-align: center;
-    font-size: 14px;
+    font-size: clamp(12px, 1vw, 16px);
     margin-bottom: 5px;
     color: #007acc;
 }
@@ -204,7 +189,8 @@ ul.channel-list li:hover:not(.active) {
     background-color: #3399ff;
 }
 
-@media (orientation: portrait) {
+/* Mobile portrait layout */
+@media (orientation: portrait), (max-width: 768px) {
     .container {
         flex-direction: column;
     }
@@ -217,5 +203,22 @@ ul.channel-list li:hover:not(.active) {
     .sidebar {
         width: 100%;
         max-height: 360px;
+    }
+}
+
+/* Large TV screens */
+@media (min-width: 1920px) {
+    .sidebar {
+        width: 400px;
+        padding: 2rem;
+    }
+
+    #fallbackMessage {
+        font-size: 2vw;
+        padding: 3rem 5rem;
+    }
+
+    #clock {
+        font-size: 1.5vw;
     }
 }
