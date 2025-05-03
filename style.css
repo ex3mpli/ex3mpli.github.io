@@ -106,16 +106,17 @@ a:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #ff66cc;
-    background-color: #1f1f1f;
+    color: var(--primary-color);
+    background-color: transparent;
     padding: 1rem 2rem;
     border-radius: 0.75rem;
     font-size: clamp(16px, 2vw, 24px);
-    text-align: left;
+    text-align: center;
     z-index: 999;
-    display: block;
-    border: 1px solid #333;
-    letter-spacing: 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
     max-width: 90%;
     box-sizing: border-box;
     white-space: nowrap;
@@ -123,6 +124,17 @@ a:hover {
     overflow-y: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+#fallbackMessage .icon {
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--primary-color);
+}
+
+#fallbackMessage .message {
+    font-weight: 300;
+    letter-spacing: 1px;
 }
 
 #fallbackMessage::-webkit-scrollbar {
