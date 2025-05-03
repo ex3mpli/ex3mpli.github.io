@@ -1,31 +1,291 @@
 @import url('https://fonts.googleapis.com/css2?family=Cal+Sans');
 
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans');
+
 :root {
-    --bg: #000000;
+    --bg: #121212;
     --text: #ffffff;
-    --accent: #ffffff;
+    --accent: #7CFC00;
     --accent-text: #000000;
-    --sidebar-bg: #000000;
-    --input-bg: #000000;
-    --link: #ffffff;
+    --sidebar-bg: #1e1e1e;
+    --input-bg: #2a2a2a;
+    --link: #bbbbbb;
     --link-hover: #ffffff;
-    --hover-bg: #ffffff20;
-    --scrollbar-bg: #000000;
-    --scrollbar-thumb: #ffffff;
+    --hover-bg: #2f2f2f;
+    --scrollbar-bg: #1c1c1c;
+    --scrollbar-thumb: #444;
 }
 
 .light-theme {
-    --bg: #ffffff;
-    --text: #000000;
-    --accent: #000000;
+    --bg: #f9f9f9;
+    --text: #1c1c1c;
+    --accent: #2e8b57;
     --accent-text: #ffffff;
     --sidebar-bg: #ffffff;
-    --input-bg: #ffffff;
-    --link: #000000;
-    --link-hover: #000000;
-    --hover-bg: #00000010;
-    --scrollbar-bg: #ffffff;
-    --scrollbar-thumb: #000000;
+    --input-bg: #eaeaea;
+    --link: #555;
+    --link-hover: #111;
+    --hover-bg: #efefef;
+    --scrollbar-bg: #ccc;
+    --scrollbar-thumb: #999;
+}
+
+* {
+    font-family: 'Cal Sans', system-ui, sans-serif;
+    font-size: 15px;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+a {
+    color: var(--link);
+    font-size: 12px;
+}
+a:hover {
+    color: var(--link-hover);
+}
+
+.container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    gap: 1rem;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.video-container {
+    position: relative;
+    flex: 1;
+    background-color: black;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#player,
+#player .jwplayer,
+.jwplayer {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+}
+
+#fallbackMessage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--accent-text);
+    background-color: var(--accent);
+    padding: 2rem 4rem;
+    border-radius: 0.75rem;
+    font-size: 24px;
+    text-align: center;
+    z-index: 999;
+    display: block;
+}
+
+#clock {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent);
+    color: var(--accent-text);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 15px;
+    z-index: 100;
+    font-family: Helvetica;
+}
+
+.sidebar {
+    width: 320px;
+    background-color: var(--sidebar-bg);
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.top-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+select, input {
+    background-color: var(--input-bg);
+    color: var(--text);
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    font-size: 0.875rem;
+}
+
+input.search-input {
+    margin-top: 0.5rem;
+}
+
+.channel-text {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 2px;
+    width: 100%;
+}
+
+.credits {
+    text-align: center;
+    font-size: 12px;
+    color: var(--link);
+    width: 100%;
+}
+
+#channelCount {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: var(--accent);
+}
+
+.list-container {
+    flex: 1;
+    overflow-y: auto;
+}
+
+ul.channel-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.channel-list li {
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 0.375rem;
+}
+
+ul.channel-list li.active {
+    background-color: var(--accent);
+    color: var(--accent-text);
+}
+
+ul.channel-list li:hover:not(.active) {
+    background-color: var(--hover-bg);
+}
+
+.list-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.list-container::-webkit-scrollbar-track {
+    background: var(--scrollbar-bg);
+    border-radius: 4px;
+}
+
+.list-container::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: 4px;
+    border: 2px solid var(--scrollbar-bg);
+}
+
+.list-container::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent);
+}
+
+.jwplayer .jw-controlbar {
+    background: linear-gradient(to top, rgba(60, 230, 10, 0.5), rgba(18, 18, 18, 0.2)) !important;
+    backdrop-filter: blur(6px);
+}
+
+.jwplayer .jw-button-color,
+.jwplayer .jw-icon,
+.jwplayer .jw-text-elapsed,
+.jwplayer .jw-text-duration {
+    color: rgba(124, 252, 0, 0.6) !important;
+    fill: rgba(124, 252, 0, 0.6) !important;
+    transition: color 0.3s ease;
+}
+
+.jwplayer .jw-icon:hover {
+    color: var(--accent) !important;
+    fill: var(--accent) !important;
+}
+
+.jwplayer .jw-progress,
+.jwplayer .jw-slider-volume .jw-progress,
+.jwplayer .jw-knob {
+    background-color: rgba(124, 252, 0, 0.5) !important;
+}
+
+.jwplayer .jw-slider-volume .jw-knob,
+.jwplayer .jw-slider-horizontal .jw-knob {
+    background-color: var(--accent) !important;
+}
+
+.jwplayer .jw-background-color {
+    background-color: transparent !important;
+}
+
+.jw-svg-icon-buffer path {
+    display: none;
+}
+
+.jw-svg-icon-buffer {
+    background-image: url('https://s4.gifyu.com/images/bL7xg.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80px 80px;
+    width: 80px;
+    height: 80px;
+    opacity: 0.8;
+}
+
+@media screen and (max-width: 768px), (orientation: portrait) {
+    .container {
+        flex-direction: column;
+    }
+
+    .video-container {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        margin-bottom: 0.5rem;
+        border-radius: 0.5rem;
+    }
+
+    .sidebar {
+        width: 100%;
+        max-height: 360px;
+        margin-bottom: 0.5rem;
+    }
+
+    #fallbackMessage {
+        font-size: 20px;
+        padding: 1rem 2rem;
+    }
+
+    .jw-svg-icon-buffer {
+        background-size: 60px 60px;
+        width: 60px;
+        height: 60px;
+    }
 }
 
 * {
