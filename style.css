@@ -79,8 +79,8 @@ a:hover {
 #player,
 #player .jwplayer,
 .jwplayer {
-    width: 100% !important;
-    height: 100% !important;
+    width: 80% !important;
+    height: 80% !important;
     position: absolute !important;
     top: 0;
     left: 0;
