@@ -1808,3 +1808,22 @@ toggleBtn.addEventListener('click', () => {
   const isLight = document.body.classList.contains('light-theme');
   localStorage.setItem('theme', isLight ? 'light' : 'dark');
 });
+
+  const toggleBtn = document.getElementById('themeToggle');
+  const body = document.body;
+
+  function updateIcon() {
+      toggleBtn.textContent = body.classList.contains('light-theme') ? '🌙' : '☀️';
+  }
+
+  if (localStorage.getItem('theme') === 'light') {
+      body.classList.add('light-theme');
+  }
+  updateIcon();
+
+  toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('light-theme');
+      const isLight = body.classList.contains('light-theme');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      updateIcon();
+  });
