@@ -2,30 +2,30 @@
 
 :root {
     --bg: #121212;
-    --text: #ffffff;
+    --text: white;
     --accent: #7CFC00;
-    --accent-text: #000000;
-    --sidebar-bg: #1e1e1e;
+    --accent-text: black;
+    --sidebar-bg: #222;
     --input-bg: #2a2a2a;
-    --link: #bbbbbb;
-    --link-hover: #ffffff;
-    --hover-bg: #2f2f2f;
+    --link: #888;
+    --link-hover: grey;
+    --hover-bg: #333;
     --scrollbar-bg: #1c1c1c;
     --scrollbar-thumb: #444;
 }
 
 .light-theme {
-    --bg: #f9f9f9;
-    --text: #1c1c1c;
+    --bg: #f2f2f2;
+    --text: #111;
     --accent: #2e8b57;
-    --accent-text: #ffffff;
+    --accent-text: white;
     --sidebar-bg: #ffffff;
     --input-bg: #eaeaea;
     --link: #555;
-    --link-hover: #111;
-    --hover-bg: #efefef;
+    --link-hover: #222;
+    --hover-bg: #ddd;
     --scrollbar-bg: #ccc;
-    --scrollbar-thumb: #999;
+    --scrollbar-thumb: #aaa;
 }
 
 * {
@@ -207,7 +207,6 @@ ul.channel-list li:hover:not(.active) {
     background-color: var(--accent);
 }
 
-/* JWPlayer themed controls */
 .jwplayer .jw-controlbar {
     background: linear-gradient(to top, rgba(60, 230, 10, 0.5), rgba(18, 18, 18, 0.2)) !important;
     backdrop-filter: blur(6px);
@@ -254,25 +253,6 @@ ul.channel-list li:hover:not(.active) {
     width: 80px;
     height: 80px;
     opacity: 0.8;
-}
-
-/* Theme toggle button */
-#themeToggle {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: var(--text);
-    padding: 0.25rem;
-    transition: opacity 0.3s ease;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-}
-
-#themeToggle:hover {
-    opacity: 0.6;
 }
 
 @media screen and (max-width: 768px), (orientation: portrait) {
