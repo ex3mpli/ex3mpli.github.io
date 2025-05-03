@@ -23,19 +23,22 @@
         <button id="themeToggle" title="Toggle theme">
             <span id="themeIcon">🌙</span>
         </button>
+    
         <div class="top-controls">
-            <!---<div class="channel-text"><span>B I S D A K T V</span></div>--->
-            <div id="channelCount"></div>
-            <select id="categoryFilter" onchange="setupChannelList()">
-                <option value="all">Cignal</option>
-            </select>
-            <input class="search-input" type="search" placeholder="Search..." oninput="setupChannelList()" id="searchInput" />
+            <div class="filter-row">
+                <select id="categoryFilter" onchange="setupChannelList()">
+                    <option value="all">Cignal</option>
+                </select>
+                <div id="channelCount">0</div>
+            </div>
         </div>
-
+    
         <div class="list-container">
             <ul class="channel-list" id="channelList"></ul>
         </div>
-    </aside>
+    
+        <input class="search-input" type="search" placeholder="Search..." oninput="setupChannelList()" id="searchInput" />
+    </aside>    
 </div>
 
 <script src="script.js"></script>
