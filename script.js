@@ -379,7 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
       channelList.appendChild(li);
     });
 
-    channelCount.textContent = `Cignal: ${filtered.length}`;
+    channelCount.textContent = `All Channels: ${filtered.length}`;
   }
 
   // Setup
