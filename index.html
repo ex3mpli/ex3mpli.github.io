@@ -29,14 +29,12 @@
             <select id="categoryFilter" onchange="setupChannelList()">
                 <option value="all">Cignal</option>
             </select>
-            
+            <input class="search-input" type="search" placeholder="Search..." oninput="setupChannelList()" id="searchInput" />
         </div>
 
         <div class="list-container">
             <ul class="channel-list" id="channelList"></ul>
         </div>
-
-        <input class="search-input" type="search" placeholder="Search..." oninput="setupChannelList()" id="searchInput" />
     </aside>
 </div>
 
