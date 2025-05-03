@@ -139,13 +139,6 @@ input.search-input {
     color: #005f99;
 }
 
-.credits {
-    text-align: center;
-    font-size: clamp(11px, 1vw, 14px);
-    color: #007acc;
-    width: 100%;
-}
-
 #channelCount {
     text-align: center;
     font-size: clamp(12px, 1vw, 16px);
