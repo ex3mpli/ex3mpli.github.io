@@ -1795,3 +1795,16 @@ document.onkeydown = (event) => {
     return false;
   }
 };
+
+const toggleBtn = document.getElementById('themeToggle');
+const currentTheme = localStorage.getItem('theme');
+
+if (currentTheme === 'light') {
+  document.body.classList.add('light-theme');
+}
+
+toggleBtn.addEventListener('click', () => {
+  document.body.classList.toggle('light-theme');
+  const isLight = document.body.classList.contains('light-theme');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+});
