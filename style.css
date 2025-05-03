@@ -1,31 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Cal+Sans');
 
 :root {
-    --bg: #121212;
-    --text: white;
-    --accent: #7CFC00;
-    --accent-text: black;
-    --sidebar-bg: #222;
-    --input-bg: #2a2a2a;
-    --link: #888;
-    --link-hover: grey;
-    --hover-bg: #333;
-    --scrollbar-bg: #1c1c1c;
-    --scrollbar-thumb: #444;
+    --bg: #000000;
+    --text: #ffffff;
+    --accent: #ffffff;
+    --accent-text: #000000;
+    --sidebar-bg: #000000;
+    --input-bg: #000000;
+    --link: #ffffff;
+    --link-hover: #ffffff;
+    --hover-bg: #ffffff20;
+    --scrollbar-bg: #000000;
+    --scrollbar-thumb: #ffffff;
 }
 
 .light-theme {
-    --bg: #f2f2f2;
-    --text: #111;
-    --accent: #2e8b57;
-    --accent-text: white;
+    --bg: #ffffff;
+    --text: #000000;
+    --accent: #000000;
+    --accent-text: #ffffff;
     --sidebar-bg: #ffffff;
-    --input-bg: #eaeaea;
-    --link: #555;
-    --link-hover: #222;
-    --hover-bg: #ddd;
-    --scrollbar-bg: #ccc;
-    --scrollbar-thumb: #aaa;
+    --input-bg: #ffffff;
+    --link: #000000;
+    --link-hover: #000000;
+    --hover-bg: #00000010;
+    --scrollbar-bg: #ffffff;
+    --scrollbar-thumb: #000000;
 }
 
 * {
@@ -207,8 +207,9 @@ ul.channel-list li:hover:not(.active) {
     background-color: var(--accent);
 }
 
+/* JWPlayer simplified to black/white controls */
 .jwplayer .jw-controlbar {
-    background: linear-gradient(to top, rgba(60, 230, 10, 0.5), rgba(18, 18, 18, 0.2)) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(6px);
 }
 
@@ -216,8 +217,8 @@ ul.channel-list li:hover:not(.active) {
 .jwplayer .jw-icon,
 .jwplayer .jw-text-elapsed,
 .jwplayer .jw-text-duration {
-    color: rgba(124, 252, 0, 0.6) !important;
-    fill: rgba(124, 252, 0, 0.6) !important;
+    color: var(--accent) !important;
+    fill: var(--accent) !important;
     transition: color 0.3s ease;
 }
 
@@ -229,7 +230,7 @@ ul.channel-list li:hover:not(.active) {
 .jwplayer .jw-progress,
 .jwplayer .jw-slider-volume .jw-progress,
 .jwplayer .jw-knob {
-    background-color: rgba(124, 252, 0, 0.5) !important;
+    background-color: var(--accent) !important;
 }
 
 .jwplayer .jw-slider-volume .jw-knob,
@@ -246,13 +247,10 @@ ul.channel-list li:hover:not(.active) {
 }
 
 .jw-svg-icon-buffer {
-    background-image: url('https://s4.gifyu.com/images/bL7xg.gif');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 80px 80px;
-    width: 80px;
-    height: 80px;
-    opacity: 0.8;
+    background: none;
+    width: 0;
+    height: 0;
+    opacity: 0;
 }
 
 @media screen and (max-width: 768px), (orientation: portrait) {
