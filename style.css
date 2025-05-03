@@ -63,9 +63,9 @@ a:hover {
     transform: translate(-50%, -50%);
     color: #003366;
     background-color: #b3e0ff;
-    padding: 1rem 2rem; /* Reduced padding */
+    padding: 1rem 2rem;
     border-radius: 0.75rem;
-    font-size: clamp(16px, 2vw, 24px); /* Slightly smaller font */
+    font-size: clamp(16px, 2vw, 24px);
     text-align: left;
     z-index: 999;
     display: block;
@@ -74,12 +74,18 @@ a:hover {
     letter-spacing: 1px;
     max-width: 90%;
     box-sizing: border-box;
-    white-space: nowrap;       /* Prevent wrapping */
-    overflow-x: auto;          /* Enable horizontal scroll */
+
+    white-space: nowrap;
+    overflow-x: auto;
     overflow-y: hidden;
-    text-overflow: initial;    /* Show all text via scrolling */
+    -ms-overflow-style: none;      /* IE/Edge */
+    scrollbar-width: none;         /* Firefox */
 }
 
+/* Chrome, Safari, Opera */
+#fallbackMessage::-webkit-scrollbar {
+    display: none;
+}
 
 #clock {
     position: absolute;
