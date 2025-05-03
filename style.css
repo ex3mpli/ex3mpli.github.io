@@ -1,5 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
 
+:root {
+    --bg-color: #e6f2ff;
+    --text-color: #003366;
+    --primary-color: #007acc;
+    --hover-color: #005f99;
+    --accent-color: #b3e0ff;
+    --container-bg: #f0f8ff;
+    --input-bg: #d9f0ff;
+    --active-bg: #99d6ff;
+    --hover-bg: #cceeff;
+    --scrollbar-track: #cceeff;
+    --scrollbar-thumb: #66b3ff;
+    --scrollbar-thumb-hover: #3399ff;
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #f0f0f0;
+    --primary-color: #ff66cc;
+    --hover-color: #cc0099;
+    --accent-color: #1f1f1f;
+    --container-bg: #1e1e1e;
+    --input-bg: #2a2a2a;
+    --active-bg: #660033;
+    --hover-bg: #331122;
+    --scrollbar-track: #2a2a2a;
+    --scrollbar-thumb: #cc0099;
+    --scrollbar-thumb-hover: #ff00cc;
+}
+
+#themeToggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    align-self: flex-end;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+}
+#themeToggle:hover {
+    color: var(--hover-color);
+}
+
 * {
     font-family: 'Dubai Light', 'Open Sans', sans-serif;
     font-size: clamp(14px, 1.2vw, 18px);
@@ -15,14 +59,15 @@ html, body {
     overflow: hidden;
 }
 
-a {
-    color: #ff66cc;
-    font-size: clamp(11px, 1vw, 14px);
-    text-decoration: none;
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
-
+a {
+    color: var(--primary-color);
+}
 a:hover {
-    color: #cc0099;
+    color: var(--hover-color);
 }
 
 .container {
