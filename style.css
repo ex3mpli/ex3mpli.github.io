@@ -74,6 +74,9 @@ a:hover {
     letter-spacing: 1px;
     max-width: 90%;
     box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #clock {
