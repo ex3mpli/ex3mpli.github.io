@@ -408,7 +408,7 @@ const icon = document.getElementById('themeIcon');
 function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
-    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    icon.textContent = theme === 'dark' ? '☀︎' : '☼';
 }
 
 // Load stored theme
