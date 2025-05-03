@@ -1659,47 +1659,54 @@ const channels = [
   },
 ]
 function updateClock() {
-  const _0x27bb15 = new Date(),
-    _0x2b023b = _0x27bb15.toLocaleTimeString()
-  document.getElementById('clock').textContent = _0x2b023b
+  const now = new Date();
+  const timeString = now.toLocaleTimeString();
+  document.getElementById('clock').textContent = timeString;
 }
+
 function populateCategoryDropdown() {
-  const _0x25c2a1 = document.getElementById('categoryFilter'),
-    _0x13e7c2 = Array.from(
-      new Set(channels.map((_0x2332d6) => _0x2332d6.category))
-    ).sort()
-  _0x13e7c2.forEach((_0x323daa) => {
-    const _0x50e007 = document.createElement('option')
-    _0x50e007.value = _0x323daa
-    _0x50e007.textContent = _0x323daa
-    _0x25c2a1.appendChild(_0x50e007)
-  })
+  const dropdown = document.getElementById('categoryFilter');
+  const categories = Array.from(
+    new Set(channels.map(channel => channel.category))
+  ).sort();
+
+  categories.forEach(category => {
+    const option = document.createElement('option');
+    option.value = category;
+    option.textContent = category;
+    dropdown.appendChild(option);
+  });
 }
+
 function setupChannelList() {
-  const _0x48aa84 = document.getElementById('channelList'),
-    _0x39d088 = document.getElementById('channelCount'),
-    _0x231dca = document.getElementById('searchInput').value.toLowerCase(),
-    _0x1373cc = document.getElementById('categoryFilter').value
-  _0x48aa84.innerHTML = ''
-  let _0x113372 = 0
-  channels.forEach((_0x2327ed, _0x42a263) => {
-    const _0x5f3da0 = _0x1373cc === 'all' || _0x2327ed.category === _0x1373cc,
-      _0x40410f = _0x2327ed.name.toLowerCase().includes(_0x231dca)
-    if (_0x5f3da0 && _0x40410f) {
-      _0x113372++
-      const _0x9bd5de = document.createElement('li')
-      _0x9bd5de.textContent = _0x2327ed.name
-      _0x9bd5de.tabIndex = 0
-      _0x9bd5de.onclick = () => loadChannel(_0x42a263)
-      if (_0x42a263 === activeIndex) {
-        _0x9bd5de.classList.add('active')
+  const list = document.getElementById('channelList');
+  const countDisplay = document.getElementById('channelCount');
+  const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+  const selectedCategory = document.getElementById('categoryFilter').value;
+
+  list.innerHTML = '';
+  let visibleCount = 0;
+
+  channels.forEach((channel, index) => {
+    const matchesCategory = selectedCategory === 'all' || channel.category === selectedCategory;
+    const matchesSearch = channel.name.toLowerCase().includes(searchQuery);
+
+    if (matchesCategory && matchesSearch) {
+      visibleCount++;
+      const listItem = document.createElement('li');
+      listItem.textContent = channel.name;
+      listItem.tabIndex = 0;
+      listItem.onclick = () => loadChannel(index);
+      if (index === activeIndex) {
+        listItem.classList.add('active');
       }
-      _0x48aa84.appendChild(_0x9bd5de)
+      list.appendChild(listItem);
     }
-  })
-  _0x39d088.textContent =
-    'Total Channel' + (_0x113372 !== 1 ? 's' : '') + ': ' + _0x113372
+  });
+
+  countDisplay.textContent = `Total Channel${visibleCount !== 1 ? 's' : ''}: ${visibleCount}`;
 }
+
 function initPlayer() {
   jwPlayerInstance = jwplayer('player').setup({
     width: '100%',
@@ -1711,68 +1718,80 @@ function initPlayer() {
     hlshtml: true,
     displaytitle: false,
     logo: { hide: true },
-  })
-  jwPlayerInstance.on('error', (_0x47e075) => {
-    console.error('JWPlayer error:', _0x47e075)
-    showFallbackMessage()
-  })
+  });
+
+  jwPlayerInstance.on('error', (error) => {
+    console.error('JWPlayer error:', error);
+    showFallbackMessage();
+  });
+
   jwPlayerInstance.on('play', () => {
-    hideFallbackMessage()
-  })
+    hideFallbackMessage();
+  });
 }
-function loadChannel(_0x227b5d) {
-  if (activeIndex === _0x227b5d) {
-    return
+
+function loadChannel(index) {
+  if (activeIndex === index) return;
+
+  activeIndex = index;
+  setupChannelList();
+
+  const channel = channels[index];
+  const playerConfig = {
+    file: channel.url,
+    title: channel.name,
+    autostart: true,
+  };
+
+  if (channel.type === 'mpd' && channel.drm) {
+    playerConfig.drm = channel.drm;
   }
-  activeIndex = _0x227b5d
-  setupChannelList()
-  const _0x1fdb9b = channels[_0x227b5d],
-    _0x7e5c9e = {
-      file: _0x1fdb9b.url,
-      title: _0x1fdb9b.name,
-      autostart: true,
-    }
-  _0x1fdb9b.type === 'mpd' && _0x1fdb9b.drm && (_0x7e5c9e.drm = _0x1fdb9b.drm)
-  hideFallbackMessage()
-  jwPlayerInstance.setup(_0x7e5c9e)
+
+  hideFallbackMessage();
+  jwPlayerInstance.setup(playerConfig);
 }
+
 function showFallbackMessage() {
-  const _0x49ecbd = document.getElementById('fallbackMessage')
-  _0x49ecbd.style.display = 'block'
+  document.getElementById('fallbackMessage').style.display = 'block';
 }
+
 function hideFallbackMessage() {
-  const _0x5ef163 = document.getElementById('fallbackMessage')
-  _0x5ef163.style.display = 'none'
+  document.getElementById('fallbackMessage').style.display = 'none';
 }
+
 window.addEventListener('load', () => {
-  initPlayer()
-  populateCategoryDropdown()
-  setupChannelList()
-  showFallbackMessage()
-  updateClock()
-  setInterval(updateClock, 1000)
-})
+  initPlayer();
+  populateCategoryDropdown();
+  setupChannelList();
+  showFallbackMessage();
+  updateClock();
+  setInterval(updateClock, 1000);
+});
+
 window.addEventListener('beforeunload', () => {
-  jwPlayerInstance && jwPlayerInstance.remove()
-})
-document.addEventListener('contextmenu', (_0x5a8d3d) =>
-  _0x5a8d3d.preventDefault()
-)
-function ctrlShiftKey(_0x1845ca, _0x1a4dae) {
-  return (
-    _0x1845ca.ctrlKey &&
-    _0x1845ca.shiftKey &&
-    _0x1845ca.keyCode === _0x1a4dae.charCodeAt(0)
-  )
-}
-document.onkeydown = (_0x15d098) => {
-  if (
-    _0x15d098.keyCode === 123 ||
-    ctrlShiftKey(_0x15d098, 'I') ||
-    ctrlShiftKey(_0x15d098, 'J') ||
-    ctrlShiftKey(_0x15d098, 'C') ||
-    (_0x15d098.ctrlKey && _0x15d098.keyCode === 'U'.charCodeAt(0))
-  ) {
-    return false
+  if (jwPlayerInstance) {
+    jwPlayerInstance.remove();
   }
+});
+
+document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+function ctrlShiftKey(event, keyChar) {
+  return (
+    event.ctrlKey &&
+    event.shiftKey &&
+    event.keyCode === keyChar.charCodeAt(0)
+  );
 }
+
+document.onkeydown = (event) => {
+  if (
+    event.keyCode === 123 || // F12
+    ctrlShiftKey(event, 'I') ||
+    ctrlShiftKey(event, 'J') ||
+    ctrlShiftKey(event, 'C') ||
+    (event.ctrlKey && event.keyCode === 'U'.charCodeAt(0))
+  ) {
+    return false;
+  }
+};
