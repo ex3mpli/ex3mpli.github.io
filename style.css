@@ -92,7 +92,8 @@ a:hover {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: transparent;
-    color: var(--primary-color);
+    color: #ffffff;
+    /*color: var(--primary-color);*/
     padding: 1rem 2rem;
     border-radius: 0.75rem;
     font-size: clamp(12px, 2vw, 20px);
@@ -250,7 +251,7 @@ ul.channel-list li:hover:not(.active) {
 
     #fallbackMessage {
         font-size: 2vw;
-        padding: 3rem 5rem;
+        padding: 1rem 3rem;
     }
 
     #clock {
