@@ -1367,9 +1367,9 @@ const channels = [
       name: 'BOXING TV',
       src: 'https://1180885077.rsc.cdn77.org/HLS/BOXINGTV.m3u8',
     },
-  ];
+  ],
 
-  const correctPassword = 'phcorner';
+  const correctPassword = 'reduxneue!';
 
 function togglePassword() {
   const passwordInput = document.getElementById('passwordInput');
@@ -1530,15 +1530,3 @@ document.onkeydown = (e) => {
   }
 };
 
-const toggleBtn = document.getElementById('themeToggle');
-const currentTheme = localStorage.getItem('theme');
-
-if (currentTheme === 'light') {
-  document.body.classList.add('light-theme');
-}
-
-toggleBtn.addEventListener('click', () => {
-  document.body.classList.toggle('light-theme');
-  const isLight = document.body.classList.contains('light-theme');
-  localStorage.setItem('theme', isLight ? 'light' : 'dark');
-});
