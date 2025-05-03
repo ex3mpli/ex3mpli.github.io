@@ -1,12 +1,12 @@
-c<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>NingVisionXO</title>
+<title>BisdakTV</title>
 <link rel="icon" type="image/png" href="bisdaktv.png">
 <script src="https://fle-rvd0i9o8-moo.com/player/jw8_26/jwplayer.js"></script>
-<script>jwplayer.key = "eNFaXCjyURVoCCGiHp7HTQ3hDhE/AfL0g8VE1fRbL84=";</script>
+<script>jwplayer.key = "XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo";</script>
 <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
 <link rel="stylesheet" href="style.css">
 </head>
@@ -16,16 +16,18 @@ c<!DOCTYPE html>
     <div class="video-container">
         <div id="clock"></div>
         <div id="player"></div>
-        <div id="fallbackMessage">Please select a channel! :D</div>
+        <div id="fallbackMessage">Select a channel to watch!</div>
     </div>
 
     <aside class="sidebar">
+        <button id="themeToggle" title="Toggle theme">
+            <span id="themeIcon">☼</span>
+        </button>
         <div class="top-controls">
-            <div class="channel-text">NINGVISION XO</div>
-            <div class="credits">Owned and made by <a href="https://phcorner.org/members/ningning__.1948144/" target="_blank">Ningning__</a> on PHcorner. Enjoy!</div>
+            <!---<div class="channel-text"><span>B I S D A K T V</span></div>--->
             <div id="channelCount"></div>
             <select id="categoryFilter" onchange="setupChannelList()">
-                <option value="all">All Channels</option>
+                <option value="all">Cignal</option>
             </select>
             <input class="search-input" type="search" placeholder="Search..." oninput="setupChannelList()" id="searchInput" />
         </div>
