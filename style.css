@@ -543,3 +543,17 @@ ul.channel-list li:hover:not(.active) {
         height: 60px;
     }
 }
+
+#themeToggle {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text);
+    padding: 0.25rem;
+    transition: opacity 0.3s ease;
+}
+
+#themeToggle:hover {
+    opacity: 0.6;
+}
