@@ -22,7 +22,7 @@
 
 > *Modern layout with sidebar and integrated player*
 
-![Screenshot](https://ex3mpli.github.io/screenshot.png) <!-- Replace this with your actual screenshot path -->
+![Screenshot](https://ex3mpli.github.io/sslight.png,https://ex3mpli.github.io/ssdark.png)<!-- Replace this with your actual screenshot path -->
 
 ---
 
