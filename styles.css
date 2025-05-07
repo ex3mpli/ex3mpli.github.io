@@ -1,9 +1,9 @@
 /* Root Theme Variables */
 :root {
-  --bg-light: #ffffff;
+  --bg-light: #f0f0f0;
   --bg-dark: #121212;
-  --text-light: #000000;
-  --text-dark: #f0f0f0;
+  --text-light: #1a1a1a;
+  --text-dark: #e0e0e0;
   --sidebar-width: 300px;
   --transition: 0.3s ease;
 }
@@ -18,20 +18,57 @@
   --text: var(--text-dark);
 }
 
-* {
+/* Global Reset */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* Set core body defaults */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%; /* Prevent font scaling in iOS */
+  -ms-text-size-adjust: 100%;     /* Prevent font scaling in IE */
+  text-size-adjust: 100%;
+  font-family: system-ui, sans-serif;
+}
+
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
   background-color: var(--bg);
   color: var(--text);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  transition: background-color var(--transition), color var(--transition);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove default list and anchor styles */
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+/* Make images responsive */
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* Container Layout */
