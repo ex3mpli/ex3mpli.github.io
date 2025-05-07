@@ -159,6 +159,7 @@ img, video {
   border-radius: 6px;
   border: 1px solid #ccc;
   margin-top: 0.5rem;
+  width: 100%;
 }
 
 /* Channel List */
