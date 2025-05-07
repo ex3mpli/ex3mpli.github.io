@@ -124,14 +124,13 @@ a:hover {
 
 #clock {
     position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--accent-color);
-    color: var(--primary-color);
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: clamp(13px, 1.2vw, 18px);
+    top: 5px;
+    left: 5px; /* Align to the left side */
+    background-color: transparent; /* or var(--clock-bg) */
+    color: var(--highlight);
+    padding: 5px 5px;
+    border-radius: 0;
+    font-size: 14px;
     z-index: 100;
 }
 
