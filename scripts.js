@@ -1,16 +1,22 @@
 const channels = [
     {
         name: 'A2Z',
-        src: 'https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/cg_a2z.mpd',
-        key: 'f703e4c8ec9041eeb5028ab4248fa094:c22f2162e176eee6273a5d0b68d19530',
-        drm: 'clearkey',
+        category: 'Cignal',
+        type: 'mpd',
+        url: 'https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/cg_a2z.mpd',
+        drm: {
+            clearkey: { keyId: 'f703e4c8ec9041eeb5028ab4248fa094', key: 'f703e4c8ec9041eeb5028ab4248fa094' },
+            },
     },
     {
         name: 'ABC AUSTRALIA',
-        src: 'https://qp-pldt-live-grp-10-prod.akamaized.net/out/u/dr_abc_aus.mpd',
-        key: '389497f9f8584a57b234e27e430e04b7:3b85594c7f88604adf004e45c03511c0',
-        drm: 'clearkey',
-    },
+        category: 'Cignal',
+        type: 'mpd',
+        url: 'https://qp-pldt-live-grp-10-prod.akamaized.net/out/u/dr_abc_aus.mpd',
+        drm: {
+            clearkey: { keyId: '389497f9f8584a57b234e27e430e04b7', key: '3b85594c7f88604adf004e45c03511c0' },
+            },
+    }
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
