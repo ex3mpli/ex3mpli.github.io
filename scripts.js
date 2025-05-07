@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
       channelList.appendChild(li);
     });
 
-    channelCount.textContent = `All Channels: ${filtered.length}`;
+    channelCount.textContent = `Total: ${filtered.length}`;
   }
 
   // Setup
