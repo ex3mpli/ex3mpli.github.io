@@ -1,33 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
 
 :root {
-    --bg-color: #ffffff;
-    --text-color: #000000;
-    --primary-color: #000000;
-    --hover-color: #333333;
-    --accent-color: #f0f0f0;
-    --container-bg: #ffffff;
-    --input-bg: #f9f9f9;
-    --active-bg: #e0e0e0;
-    --hover-bg: #f5f5f5;
-    --scrollbar-track: #e0e0e0;
-    --scrollbar-thumb: #cccccc;
-    --scrollbar-thumb-hover: #aaaaaa;
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --link-color: #666666;
+  --link-hover: #000000;
+  --container-bg: #f0f0f0;
+  --video-bg: #000000;
+  --sidebar-bg: #e0e0e0;
+  --input-bg: #dddddd;
+  --input-text: #000000;
+  --active-bg: #cccccc;
+  --active-color: #000000;
+  --hover-bg: #dddddd;
+  --scroll-track: #cccccc;
+  --scroll-thumb: #999999;
+  --highlight: #444444;
+  --clock-bg: #cccccc;
+  --clock-text: #000000;
 }
 
-[data-theme="dark"] {
-    --bg-color: #121212;
-    --text-color: #ffffff;
-    --primary-color: #ffffff;
-    --hover-color: #dddddd;
-    --accent-color: #1f1f1f;
-    --container-bg: #1e1e1e;
-    --input-bg: #2a2a2a;
-    --active-bg: #333333;
-    --hover-bg: #2b2b2b;
-    --scrollbar-track: #2a2a2a;
-    --scrollbar-thumb: #555555;
-    --scrollbar-thumb-hover: #777777;
+.dark-theme {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --link-color: #bbbbbb;
+  --link-hover: #ffffff;
+  --container-bg: #1a1a1a;
+  --video-bg: #000000;
+  --sidebar-bg: #222222;
+  --input-bg: #2a2a2a;
+  --input-text: #ffffff;
+  --active-bg: #444444;
+  --active-color: #ffffff;
+  --hover-bg: #333333;
+  --scroll-track: #1c1c1c;
+  --scroll-thumb: #555555;
+  --highlight: #777777;
+  --clock-bg: #333333;
+  --clock-text: #ffffff;
 }
 
 * {
