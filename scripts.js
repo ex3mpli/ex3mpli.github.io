@@ -107,3 +107,28 @@ toggleBtn.addEventListener('click', () => {
     const currentTheme = document.documentElement.getAttribute('data-theme');
     setTheme(currentTheme === 'dark' ? 'light' : 'dark');
 });
+
+channels.forEach((channel, index) => {
+const matchesCategory = selectedCategory === 'all' || channel.category === selectedCategory;
+const matchesSearch = channel.name.toLowerCase().includes(searchValue);
+
+if (matchesCategory && matchesSearch) {
+  totalCount++;
+
+  const listItem = document.createElement('li');
+  listItem.tabIndex = 0;
+  listItem.onclick = () => loadChannel(index);
+
+  if (index === activeIndex) {
+    listItem.classList.add('active');
+  }
+
+  listItem.textContent = channel.name + ' ';
+  
+  const statusDot = document.createElement('span');
+  statusDot.className = 'status-dot ' + (channel.isOnline ? 'status-online' : 'status-offline');
+
+  listItem.appendChild(statusDot);
+  list.appendChild(listItem);
+}
+});
