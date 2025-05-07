@@ -357,49 +357,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function setupChannelList() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const selectedCategory = categoryFilter.value;
-    channelList.innerHTML = '';
+    // Setup
+    setupChannelList();
+    searchInput.addEventListener('input', setupChannelList);
+    categoryFilter.addEventListener('change', setupChannelList);
 
-    const filtered = channels.filter(channel => {
-      const matchSearch = channel.name.toLowerCase().includes(searchTerm);
-      const matchCategory = selectedCategory === 'all' || !selectedCategory;
-      return matchSearch && matchCategory;
-    });
+    // Clock
+    function updateClock() {
+        const now = new Date();
+        const h = now.getHours();
+        const m = String(now.getMinutes()).padStart(2, '0');
+        const s = String(now.getSeconds()).padStart(2, '0');
+        const ampm = h >= 12 ? 'PM' : 'AM';
+        const displayHour = h % 12 || 12;
+        document.getElementById('clock').textContent = `${displayHour}:${m}:${s} ${ampm}`;
+    }
 
-    filtered.forEach(channel => {
-      const li = document.createElement('li');
-      li.textContent = channel.name;
-      li.onclick = () => {
-        document.querySelectorAll('.channel-list li').forEach(el => el.classList.remove('active'));
-        li.classList.add('active');
-        playChannel(channel);
-      };
-      channelList.appendChild(li);
-    });
-
-    channelCount.textContent = `Total: ${filtered.length}`;
-  }
-
-  // Setup
-  setupChannelList();
-  searchInput.addEventListener('input', setupChannelList);
-  categoryFilter.addEventListener('change', setupChannelList);
-
-  // Clock
-  function updateClock() {
-    const now = new Date();
-    const h = now.getHours();
-    const m = String(now.getMinutes()).padStart(2, '0');
-    const s = String(now.getSeconds()).padStart(2, '0');
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    const displayHour = h % 12 || 12;
-    document.getElementById('clock').textContent = `${displayHour}:${m}:${s} ${ampm}`;
-  }
-
-  setInterval(updateClock, 1000);
-  updateClock();
+    setInterval(updateClock, 1000);
+    updateClock();
 });
 
 const toggleBtn = document.getElementById('themeToggle');
